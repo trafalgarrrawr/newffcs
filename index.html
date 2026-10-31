@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIT FFCS Planner</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="morning-theme">
+
+    <!-- Decorative scrapbook elements -->
+    <div class="page-decor page-decor-one" aria-hidden="true">✦</div>
+    <div class="page-decor page-decor-two" aria-hidden="true">♡</div>
+    <div class="page-decor page-decor-three" aria-hidden="true">☾</div>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="eyebrow">✧ YOUR WEEKLY STUDY JOURNAL ✧</div>
+
+        <h1>VIT FFCS Planner</h1>
+
+        <p>Build, compare and organise your FFCS preferences</p>
+
+        <div class="header-sticker" aria-hidden="true">
+            <span>૮ ˶ᵔ ᵕ ᵔ˶ ა</span>
+            <small>study buddy</small>
+        </div>
+    </header>
+
+    <!-- Theory mode selector -->
+    <section class="controls">
+
+        <div class="control-copy">
+            <span class="control-kicker">CHOOSE YOUR SCHEDULE</span>
+            <label for="mode">Theory timing</label>
+        </div>
+
+        <select id="mode">
+            <option value="morning">Morning Theory</option>
+            <option value="evening">Evening Theory</option>
+        </select>
+
+        <span class="control-sparkle" aria-hidden="true">✧</span>
+    </section>
+
+    <!-- Main timetable -->
+    <main>
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">MONDAY — FRIDAY</span>
+                <h2>Your timetable</h2>
+            </div>
+
+            <span class="mini-note">♡ one slot at a time</span>
+        </div>
+
+        <div class="table-container">
+
+            <table id="timetable">
+
+                <thead>
+
+                    <!-- Main header -->
+                    <tr>
+                        <th>DAY</th>
+                        <th id="beforeLunchHeader" colspan="6">BEFORE LUNCH</th>
+                        <th class="lunch">LUNCH</th>
+                        <th colspan="6">AFTER LUNCH</th>
+                    </tr>
+
+                    <!-- Dynamic timing header -->
+                    <tr id="timeHeaders">
+
+                        <th></th>
+
+                        <!-- Before lunch -->
+
+                        <th
+                            data-morning="8:00–8:50 AM"
+                            data-evening="8:00–9:40 AM">
+                            8:00–8:50 AM
+                        </th>
+
+                        <th
+                            data-morning="9:00–9:50 AM"
+                            data-evening="8:00–9:40 AM">
+                            8:55–9:45 AM
+                        </th>
+
+                        <th
+                            data-morning="10:00–10:50 AM"
+                            data-evening="9:50–11:30 AM">
+                            9:50–10:40 AM
+                        </th>
+
+                        <th
+                            data-morning="11:00–11:50 AM"
+                            data-evening="9:50–11:30 AM">
+                            10:45–11:35 AM
+                        </th>
+
+                        <th
+                            data-morning="12:00 AM–12:50 PM"
+                            data-evening="11:40 AM–1:20 PM">
+                            11:40 AM–12:30 PM
+                        </th>
+
+                        <th
+                            data-morning="12:30–1:20 PM"
+                            data-evening="11:40 AM–1:20 PM">
+                            12:30–1:20 PM
+                        </th>
+
+                        <!-- Lunch divider -->
+                        <th class="lunch"></th>
+
+                        <!-- After lunch -->
+
+                        <th
+                            data-morning="2:00–3:40 PM"
+                            data-evening="2:00–2:50 PM">
+                            2:00–2:50 PM
+                        </th>
+
+                        <th
+                            data-morning="2:00–3:40 PM"
+                            data-evening="3:00–3:50 PM">
+                            2:55–3:45 PM
+                        </th>
+
+                        <th
+                            data-morning="3:50–5:30 PM"
+                            data-evening="4:00–4:50 PM">
+                            3:50–4:40 PM
+                        </th>
+
+                        <th
+                            data-morning="3:50–5:30 PM"
+                            data-evening="5:00–5:50 PM">
+                            4:45–5:35 PM
+                        </th>
+
+                        <th
+                            data-morning="5:40–7:20 PM"
+                            data-evening="6:00–6:50 PM">
+                            5:40–6:30 PM
+                        </th>
+
+                        <th
+                            data-morning="5:40–7:20 PM"
+                            data-evening="6:30–7:20 PM">
+                            6:30–7:20 PM
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <!-- JavaScript generates timetable rows here -->
+                <tbody id="timetableBody"></tbody>
+
+            </table>
+
+        </div>
+
+        <p class="table-tip">
+            <span>✧</span>
+            Select any slot to add a subject or rearrange your preferences.
+        </p>
+
+    </main>
+
+    <!-- Subject editor -->
+    <section id="editor" class="editor hidden">
+
+        <div class="editor-top">
+
+            <div>
+                <span class="section-kicker">YOUR SUBJECT OPTIONS</span>
+                <h2 id="editorTitle">Slot</h2>
+                <p id="editorSubtitle"></p>
+            </div>
+
+            <button id="closeEditor" aria-label="Close editor">
+                ×
+            </button>
+
+        </div>
+
+        <!-- Subject alternatives appear here -->
+        <div id="alternatives"></div>
+
+        <!-- Add subject form -->
+        <div class="add-form">
+
+            <h3>Add subject alternative</h3>
+
+            <label for="subjectName">Subject name</label>
+            <input
+                id="subjectName"
+                type="text"
+                placeholder="Subject name"
+            >
+
+            <label for="facultyName">Faculty</label>
+            <input
+                id="facultyName"
+                type="text"
+                placeholder="Faculty name"
+            >
+
+            <label for="combination">Complete slot combination</label>
+            <input
+                id="combination"
+                type="text"
+                placeholder="Example: C1 + TC1 + TCC1"
+            >
+
+            <button id="addSubject">
+                Add alternative
+            </button>
+
+            <p id="message"></p>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        made with a little bit of ✧ and a lot of planning
+    </footer>
+
+    <!-- Connect JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
